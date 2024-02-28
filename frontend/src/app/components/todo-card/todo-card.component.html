@@ -1,0 +1,15 @@
+<div class="todo-card">
+  <div class="todo-data">
+    <mat-checkbox
+      [checked]="todo.completed"
+      (change)="onCheckboxChange()"
+      color="primary"
+    ></mat-checkbox>
+    <div class="todo-title" [ngClass]="{ completed: todo.completed }">
+      {{ todo.title }}
+    </div>
+  </div>
+  <button mat-icon-button (click)="onDeleteTodo()" color="warn">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

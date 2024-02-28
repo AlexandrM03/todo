@@ -1,0 +1,19 @@
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+hr {
+  margin: 20px 0;
+}

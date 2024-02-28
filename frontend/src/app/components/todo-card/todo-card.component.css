@@ -1,0 +1,28 @@
+.todo-card {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.todo-data {
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+
+.todo-title {
+  margin-left: 10px;
+  overflow-wrap: break-word;
+  max-width: 80%;
+}
+
+.completed {
+  text-decoration: line-through;
+}

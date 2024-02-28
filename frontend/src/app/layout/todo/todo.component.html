@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Todo List</h1>
+
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      [(ngModel)]="newTodoTitle"
+      placeholder="Add new todo"
+      (keydown)="onEnter($event)"
+    />
+  </mat-form-field>
+
+  <app-todo-card
+    *ngFor="let todo of getUncompletedTodos()"
+    [todo]="todo"
+    (todoStatusChange)="updateTodoStatus($event)"
+    (todoDelete)="deleteTodo($event)"
+  ></app-todo-card>
+
+  <hr />
+
+  <app-todo-card
+    *ngFor="let todo of getCompletedTodos()"
+    [todo]="todo"
+    (todoStatusChange)="updateTodoStatus($event)"
+    (todoDelete)="deleteTodo($event)"
+  ></app-todo-card>
+</div>
