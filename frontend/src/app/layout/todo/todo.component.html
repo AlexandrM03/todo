@@ -10,19 +10,47 @@
     />
   </mat-form-field>
 
-  <app-todo-card
-    *ngFor="let todo of getUncompletedTodos()"
-    [todo]="todo"
-    (todoStatusChange)="updateTodoStatus($event)"
-    (todoDelete)="deleteTodo($event)"
-  ></app-todo-card>
+  <div class="todos-container" cdkDropListGroup>
+    <div
+      class="column"
+      cdkDropList
+      [cdkDropListData]="uncompletedTodos"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListSortingDisabled]="false"
+    >
+      <h2>Uncompleted</h2>
+      <div class="todo-card-wrapper">
+        <app-todo-card
+          *ngFor="let todo of uncompletedTodos; let i = index"
+          [todo]="todo"
+          (todoStatusChange)="updateTodoStatus($event)"
+          (todoDelete)="deleteTodo($event)"
+          cdkDrag
+          [cdkDragData]="todo"
+          [@scaleInOut]
+        ></app-todo-card>
+      </div>
+    </div>
 
-  <hr />
-
-  <app-todo-card
-    *ngFor="let todo of getCompletedTodos()"
-    [todo]="todo"
-    (todoStatusChange)="updateTodoStatus($event)"
-    (todoDelete)="deleteTodo($event)"
-  ></app-todo-card>
+    <div
+      class="column"
+      cdkDropList
+      [cdkDropListData]="completedTodos"
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListSortingDisabled]="false"
+    >
+      <h2>Completed</h2>
+      <div class="todo-card-wrapper">
+        <app-todo-card
+          *ngFor="let todo of completedTodos; let i = index"
+          [todo]="todo"
+          (todoStatusChange)="updateTodoStatus($event)"
+          (todoDelete)="deleteTodo($event)"
+          cdkDrag
+          [cdkDragData]="todo"
+          [@scaleInOut]
+        ></app-todo-card>
+      </div>
+    </div>
+  </div>
 </div>
