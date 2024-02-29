@@ -1,0 +1,34 @@
+<ng-container *ngIf="!isMobileView; else mobileView">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let item of data">{{ item[headerProperty] }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let property of properties">
+        <tr>
+          <td>{{ beautifyKey(property) }}</td>
+          <td *ngFor="let item of data">{{ item[property] }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ng-container>
+
+<ng-template #mobileView>
+  <table>
+    <tr>
+      <th *ngFor="let item of data">{{ item[headerProperty] }}</th>
+    </tr>
+    <ng-container *ngFor="let property of properties">
+      <tr>
+        <th [attr.colspan]="3">{{ beautifyKey(property) }}</th>
+      </tr>
+      <tr>
+        <td *ngFor="let item of data">{{ item[property] }}</td>
+      </tr>
+    </ng-container>
+  </table>
+</ng-template>
