@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
     imports: [CommonModule],
     templateUrl: './table.component.html',
     styleUrl: './table.component.css'
+    // TODO: create animation for hover
 })
 export class TableComponent implements OnInit {
     @Input() data: any[] = [];
