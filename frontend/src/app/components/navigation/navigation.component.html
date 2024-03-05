@@ -1,0 +1,12 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/todo">Todo</a>
+      <a mat-list-item routerLink="/phones">Phones</a>
+      <a mat-list-item routerLink="/animations">Animations</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
