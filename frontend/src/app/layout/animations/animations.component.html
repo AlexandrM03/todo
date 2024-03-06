@@ -1,17 +1,33 @@
-<table>
-  <tr>
-    <td [@bounce]="columns[0].bounce" (mouseenter)="bounceColumn()">1</td>
-    <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
-    <td [class.rotate]="rotate">3</td>
-  </tr>
-  <tr>
-    <td [@bounce]="columns[1].bounce">1</td>
-    <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
-    <td [class.rotate]="rotate">3</td>
-  </tr>
-  <tr>
-    <td [@bounce]="columns[2].bounce">1</td>
-    <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
-    <td [class.rotate]="rotate">3</td>
-  </tr>
-</table>
+<div class="container">
+  <table>
+    <tr>
+      <td [@bounce]="columns[0].bounce" (mouseenter)="bounceColumn()">1</td>
+      <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
+      <td [class.rotate]="rotate">3</td>
+    </tr>
+    <tr>
+      <td [@bounce]="columns[1].bounce">1</td>
+      <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
+      <td [class.rotate]="rotate">3</td>
+    </tr>
+    <tr>
+      <td [@bounce]="columns[2].bounce">1</td>
+      <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">2</td>
+      <td [class.rotate]="rotate">3</td>
+    </tr>
+  </table>
+
+  <table [@bounceCol]="bounceState">
+    <tbody>
+      <tr *ngFor="let row of rows; let i = index">
+        <td (mouseenter)="togleBounce()" (mouseleave)="togleBounce()">
+          {{ row.col1 }}
+        </td>
+        <td (mouseenter)="toggleRotate()" (mouseleave)="toggleRotate()">
+          {{ row.col2 }}
+        </td>
+        <td [class.rotate]="rotate">{{ row.col3 }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

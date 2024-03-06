@@ -1,9 +1,15 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
-      <a mat-list-item routerLink="/todo">Todo</a>
+      <!-- <a mat-list-item routerLink="/todo">Todo</a>
       <a mat-list-item routerLink="/phones">Phones</a>
-      <a mat-list-item routerLink="/animations">Animations</a>
+      <a mat-list-item routerLink="/animations">Animations</a> -->
+      <a
+        mat-list-item
+        *ngFor="let item of routes"
+        routerLink="{{ item.path }}"
+        >{{ item.name }}</a
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
