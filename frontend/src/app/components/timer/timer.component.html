@@ -1,0 +1,23 @@
+<div class="timer">
+  <div>{{ displayTime }}</div>
+  <div class="controls">
+    <ng-container *ngIf="!isRunning && !isPaused">
+      <button mat-raised-button color="primary" (click)="startTimer()">
+        Start
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isRunning">
+      <button mat-raised-button color="warn" (click)="pauseTimer()">
+        Pause
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isPaused">
+      <button mat-raised-button color="primary" (click)="resumeTimer()">
+        Resume
+      </button>
+      <button mat-raised-button color="primary" (click)="restartTimer()">
+        Restart
+      </button>
+    </ng-container>
+  </div>
+</div>

@@ -19,7 +19,7 @@ import { Component, ElementRef, ViewChild, inject } from '@angular/core';
             transition('inactive <=> active', animate('200ms ease-in'))
         ]),
         trigger('bounceCol', [
-            transition('normal => hovered', [
+            transition('normal => hovered, :enter', [
                 query('tr > td:first-child', [
                     style({ transform: 'translateY(0)' }),
                     stagger(250, [

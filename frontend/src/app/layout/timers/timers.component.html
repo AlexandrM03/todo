@@ -1,0 +1,14 @@
+<div class="container">
+  <app-timer
+    time="00:01:00"
+    (onTimerStart)="startTimer(TimerType.ONE_MINUTE)"
+  />
+  <app-timer
+    time="00:03:00"
+    (onTimerStart)="startTimer(TimerType.THREE_MINUTES)"
+  />
+  <app-timer
+    time="00:05:00"
+    (onTimerStart)="startTimer(TimerType.FIVE_MINUTES)"
+  />
+</div>
