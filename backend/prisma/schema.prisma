@@ -19,3 +19,16 @@ model Todo {
     completed Boolean  @default(false)
     createdAt DateTime @default(now())
 }
+
+model Timer {
+    id   String    @id @default(uuid())
+    type TimerType
+
+    startedAt DateTime @default(now())
+}
+
+enum TimerType {
+    ONE_MINUTE
+    THREE_MINUTES
+    FIVE_MINUTES
+}
