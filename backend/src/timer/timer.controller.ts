@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { TimerService } from './timer.service';
 import { TimerType } from '@prisma/client';
 
@@ -7,8 +7,11 @@ export class TimerController {
     constructor(private readonly timerService: TimerService) { }
 
     @Get()
-    async getForGraph() {
-        return await this.timerService.getForGraph();
+    async getForGraph(
+        @Query('startDate') startDate: string,
+        @Query('endDate') endDate: string,
+    ) {
+        return await this.timerService.getForGraph(startDate, endDate);
     }
 
     @Post()

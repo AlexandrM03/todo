@@ -16,21 +16,41 @@ export class TimerService {
         });
     }
 
-    async getForGraph() {
+    async getForGraph(startDate: string, endDate: string) {
         const timers = await this.prisma.timer.findMany({
+            where: {
+                AND: [
+                    { startedAt: { gte: startDate } },
+                    { startedAt: { lte: endDate } }
+                ]
+            },
             orderBy: {
                 startedAt: 'asc'
+            },
+            select: {
+                startedAt: true,
+                type: true
             }
         });
 
-        const result = timers.reduce((acc, timer) => {
-            const date = timer.startedAt.toISOString().split('T')[0];
-            if (!acc[date]) {
-                acc[date] = 0;
+        const result = {};
+
+        for (const timerType of Object.values(TimerType)) {
+            result[timerType] = {};
+            let currentDate = new Date(startDate);
+            while (currentDate <= new Date(endDate)) {
+                const formattedDate = currentDate.toISOString().split('T')[0];
+                result[timerType][formattedDate] = 0;
+                currentDate.setDate(currentDate.getDate() + 1);
             }
-            acc[date]++;
-            return acc;
-        }, {});
+        }
+
+        timers.forEach(timer => {
+            const date = timer.startedAt.toISOString().split('T')[0];
+            if (result[timer.type][date] !== undefined) {
+                result[timer.type][date]++;
+            }
+        });
 
         return result;
     }
