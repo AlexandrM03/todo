@@ -1,3 +1,5 @@
 export interface TimerData {
-    [date: string]: number;
+    [type: string]: {
+        [date: string]: number;
+    };
 }

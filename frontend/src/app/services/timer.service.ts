@@ -17,7 +17,7 @@ export class TimerService {
         return this.http.post<Timer>(this.apiUrl, { type });
     }
 
-    getData(): Observable<TimerData> {
-        return this.http.get<TimerData>(`${this.apiUrl}`);
+    getData(startDate: string, endDate: string): Observable<TimerData> {
+        return this.http.get<TimerData>(`${this.apiUrl}?startDate=${startDate}&endDate=${endDate}`);
     }
 }
