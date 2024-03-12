@@ -7,17 +7,22 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-chart',
     standalone: true,
-    imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, MatButtonModule],
+    imports: [MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatSelectModule, CommonModule],
     templateUrl: './chart.component.html',
     styleUrl: './chart.component.css',
     providers: [provideNativeDateAdapter()]
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
     @ViewChild('stepChart', { static: true }) stepChartElement: ElementRef = {} as ElementRef;
+
+    selectedChartType: string = 'line';
+    chartTypes: string[] = ['line', 'bar', 'scatter', 'effectScatter'];
 
     range = new FormGroup({
         start: new FormControl<Date | null>(null),
@@ -27,10 +32,6 @@ export class ChartComponent implements OnInit {
     constructor(
         private timerService: TimerService
     ) { }
-
-    ngOnInit(): void {
-
-    }
 
     loadChart(): void {
         if (this.range.value.start && this.range.value.end) {
@@ -53,7 +54,7 @@ export class ChartComponent implements OnInit {
 
             return {
                 name: type,
-                type: 'line',
+                type: this.selectedChartType,
                 smooth: true,
                 symbol: 'circle',
                 symbolSize: 10,

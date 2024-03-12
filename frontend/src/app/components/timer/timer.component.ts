@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, interval, takeUntil } from 'rxjs';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-timer',
     standalone: true,
-    imports: [MatButtonModule, CommonModule],
+    imports: [MatButtonModule, CommonModule, MatSnackBarModule],
     templateUrl: './timer.component.html',
     styleUrl: './timer.component.css'
 })
@@ -16,13 +17,14 @@ export class TimerComponent implements OnInit, OnDestroy {
     @Output() onTimerPause = new EventEmitter<void>();
     @Output() onTimerResume = new EventEmitter<void>();
     @Output() onTimerRestart = new EventEmitter<void>();
+    @Output() onTimerEnd = new EventEmitter<void>();
 
     timeInSeconds = 0;
     private destroy$: Subject<void> = new Subject();
     isRunning = false;
     isPaused = false;
 
-    constructor() { }
+    constructor(private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {
         this.timeInSeconds = this.parseTime(this.time);
@@ -42,6 +44,12 @@ export class TimerComponent implements OnInit, OnDestroy {
                 if (this.timeInSeconds > 0) {
                     this.timeInSeconds--;
                 } else {
+                    this.snackBar.open('Time is up!', 'Close', {
+                        duration: 5000,
+                        horizontalPosition: 'center',
+                        verticalPosition: 'bottom'
+                    });
+                    this.onTimerEnd.emit();
                     this.stopTimer();
                 }
             });
@@ -72,6 +80,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.onTimerPause.emit();
         this.isRunning = false;
         this.destroy$.next();
+        this.ngOnInit();
     }
 
     parseTime(timeString: string): number {
